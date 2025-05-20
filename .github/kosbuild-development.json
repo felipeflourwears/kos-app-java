@@ -1,0 +1,12 @@
+{
+  "default_keyset": "test.kos-demos",
+  "build_cmd": "./quickbuild.sh",
+
+  "artifacts": [
+      {
+        "id": "demo-popa-rack-app",
+        "filename": "target/popa-rack-app-${KOS_STD_VERSION_REGEX}.kab",
+        "artifactstore": "kosDemoRepo"
+      }
+  ]
+}
