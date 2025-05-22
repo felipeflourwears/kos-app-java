@@ -14,8 +14,11 @@ import com.tccc.kos.core.service.device.serialnum.SerialNumberProvider;
 import com.tccc.kos.core.service.device.serialnum.config.ConfigSerialNumberProvider;
 import com.tccc.kos.ext.cms.service.screen.ScreenContext;
 import com.tccc.kos.ext.cms.service.screen.ScreenService;
+import com.kondra.kos.popa.rack.GpioLedController;
+
 
 import lombok.extern.slf4j.Slf4j;
+
 
 /**
  * System application for Popa rack.
@@ -72,6 +75,16 @@ public class RackApp extends SystemApplication<RackAppConfig> {
         if (source != null) {
             browserService.goToUrl(source.getFullPath("index.html"));
             //browserService.goToUrl("https://www.google.com");
+        }
+
+        try {
+            GpioLedController ledController = new GpioLedController("17");
+            new Thread(() -> {
+                ledController.blink(500, 500, 3);
+            }).start();
+            log.info("🚦 LED Blink iniciado en GPIO 17.");
+        }catch (Exception e) {
+            log.error("❌ Error al iniciar GpioLedController", e);
         }
     }
 }
