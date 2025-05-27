@@ -17,6 +17,7 @@ import com.tccc.kos.ext.cms.service.screen.ScreenService;
 
 
 import com.kondra.kos.popa.rack.HelloWorld;
+import com.kondra.kos.popa.rack.Gpio;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -74,6 +75,8 @@ public class RackApp extends SystemApplication<RackAppConfig> {
     public void started() {
         log.info("🔧 Método started() executed.");
         HelloWorld.printArt();
+        Gpio.startBlink();
+        log.info("🔧 Método started() Finish.");
 
         // nav to the ui
         if (source != null) {
