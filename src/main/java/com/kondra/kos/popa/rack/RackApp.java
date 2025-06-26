@@ -17,8 +17,7 @@ import com.tccc.kos.ext.cms.service.screen.ScreenService;
 
 
 import com.kondra.kos.popa.rack.HelloWorld;
-import com.kondra.kos.popa.rack.Gpio;
-import com.kondra.kos.popa.rack.HelloWorldSensor;
+
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -76,18 +75,9 @@ public class RackApp extends SystemApplication<RackAppConfig> {
     @Override
     public void started() {
         log.info("🔧 Método started() executed.");
-        HelloWorld.printArt();
-        Gpio.startBlink();
+        ExecutedBinary.startBinary();
         log.info("🔧 Método started() Finish.");
 
-        // Init WebSocket HelloWorldSensor
-        try {
-            HelloWorldSensor sensorServer = new HelloWorldSensor(8887);
-            sensorServer.start();
-            log.info("🌐 WebSocket HelloWorldSensor iniciado en puerto 8887 ------------------------------------------------------ LF");
-        } catch (Exception e) {
-            log.error("❌ Error iniciando WebSocket HelloWorldSensor", e);
-        }
 
         // nav to the ui
         if (source != null) {

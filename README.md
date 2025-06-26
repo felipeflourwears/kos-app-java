@@ -81,3 +81,70 @@ echo 17 > /sys/class/gpio/unexport
 root@kos:/mnt/datafs/logs/live# sudo -u kos /bin/bash
 kos@kos:/mnt/datafs/logs/live$ su -s /bin/bash kos
 ```
+
+## Ledtool
+
+### Structure Basic with permissions
+```bash
+root@kos:/mnt/datafs/ledtool# ls -la
+total 36
+drwxr-xr-x  5 kos  kos  4096 Jun 26 04:47 .
+drwxr-xr-x 12 root root 4096 Apr 28  2022 ..
+drwxr-xr-x  2 kos  kos  4096 Jan  1  1970 bin
+-rwxr-xr-x  1 kos  kos   344 Jun 26 05:10 blue.sh
+-rwxr-xr-x  1 kos  kos   346 Jun 26 05:04 green.sh
+drwxr-xr-x  2 kos  kos  4096 Jan  1  1970 lib
+-rwxr-xr-x  1 kos  kos   344 Jun 26 05:10 red.sh
+-rwxr-xr-x  1 kos  kos   572 Jun 26 03:58 rgb.sh
+drwxr-xr-x  3 kos  kos  4096 Jan  1  1970 share
+root@kos:/mnt/datafs/ledtool#
+
+
+root@kos:/mnt/datafs/ledtool# ls -la bin
+total 11520
+drwxr-xr-x 2 kos  kos      4096 Jan  1  1970 .
+drwxr-xr-x 5 kos  kos      4096 Jun 26 04:47 ..
+-rwsr-xr-x 1 root root    19808 Jan  1  1970 ledstriptool
+-rwxr-xr-x 1 kos  kos  11437061 Jan  1  1970 rackhw-tool
+-rwxr-xr-x 1 kos  kos       930 Jan  1  1970 rackhw_check_update_firmware.sh
+-rwxr-xr-x 1 kos  kos    320576 Jan  1  1970 stm32flash
+root@kos:/mnt/datafs/ledtool#
+
+root@kos:/mnt/datafs/ledtool# ls -la lib
+total 84
+drwxr-xr-x 2 kos kos  4096 Jan  1  1970 .
+drwxr-xr-x 5 kos kos  4096 Jun 26 04:47 ..
+-rw-r--r-- 1 kos kos 76680 Jan  1  1970 libws2811.so
+root@kos:/mnt/datafs/ledtool#
+
+root@kos:/mnt/datafs/ledtool# ls -la share
+total 12
+drwxr-xr-x 3 kos kos 4096 Jan  1  1970 .
+drwxr-xr-x 5 kos kos 4096 Jun 26 04:47 ..
+drwxr-xr-x 2 kos kos 4096 Jan  1  1970 rackhw
+root@kos:/mnt/datafs/ledtool#
+```
+#### Optional and testing
+```bash
+cd /
+cd /dev
+sudo chmod 666 /dev/mem
+sudo chmod 666 /dev/vcio
+```
+
+### Path required
+```bash
+cd /mnt/datafs
+mkdir ledtool
+cd /mnt/datafs/ledtool
+```
+Or move all the folder
+
+### Testing LedTool
+```bash
+su -s /bin/bash kos
+cd /mnt/datafs/ledtool
+./rgb.sh
+```
+
+
