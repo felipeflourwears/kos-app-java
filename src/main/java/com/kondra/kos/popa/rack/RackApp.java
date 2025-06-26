@@ -70,6 +70,27 @@ public class RackApp extends SystemApplication<RackAppConfig> {
             screenCtx.add(section);
         }
         screenService.mount("rack", screenCtx);
+
+        log.info("-------------------------------------------------------------------------------------------");
+        log.info("🤖 Reading Values from Video execution starting 🤖");
+        log.info("-------------------------------------------------------------------------------------------");
+
+        // Recorremos las pantallas disponibles
+        if (screenCtx.getScreens() != null && !screenCtx.getScreens().isEmpty()) {
+            for (var screen : screenCtx.getScreens()) {
+                log.info("📺 Screen Name: {}", screen.getName());
+                log.info("🎞️ Video Loops (numberOfTimesVideoPlays): {}", screen.getVideoLoops());
+                log.info("🖼️ Resolution: {}x{}", screen.getWidth(), screen.getHeight());
+                log.info("📁 Content Type: {}", screen.getContentType());
+                log.info("🏷️ Screen Type: {}", screen.getScreenType());
+                log.info("📅 Start Date: {}", screen.getStartDate());
+                log.info("📊 Priority: {}", screen.getPriority());
+                log.info("---------------------------------------------------");
+            }
+        } else {
+            log.warn("⚠️ No screens found in screen context.");
+        }
+
     }
 
     @Override
